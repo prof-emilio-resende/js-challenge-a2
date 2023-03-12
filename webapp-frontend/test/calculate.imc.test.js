@@ -1,7 +1,7 @@
 import { JSDOM } from "jsdom";
 import { expect, should } from "chai";
-import sinon from "sinon";
 
+import { initializeAJAX } from "./helpers/ajax.js";
 import { buildEventTarget } from "./helpers/events.js";
 import { calculateImc, initialize } from "../app/calculate.imc.js";
 
@@ -114,12 +114,4 @@ function initializeDOM() {
 
   global.window = dom.window;
   global.document = dom.window.document;
-}
-
-function initializeAJAX() {
-  global.server = sinon.fakeServer.create({
-    autoRespond: true,
-    respondImmediately: true
-  });
-  global.XMLHttpRequest = global.server.xhr;
 }
