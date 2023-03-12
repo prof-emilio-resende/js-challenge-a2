@@ -1,7 +1,7 @@
 import { createRequest } from '../infra/http.js';
 
 export function calculateImcAPI(person, callback) {
-    var request = createRequest();
+    var request = createRequest().withLogger();
     if (!request) return null;
   
     request.onreadystatechange = function() {

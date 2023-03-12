@@ -14,5 +14,23 @@ export function createRequest() {
         }
     }
 
+    request.withLogger = withLogger.bind(request);
     return request;
+}
+
+function withLogger () {
+    this.send = new Proxy(this.send, {
+        apply: function (target, thisArg, args) {
+            console.log('target');
+            console.log(target);
+            console.log('thisArg');
+            console.log(typeof thisArg == "object" ? thisArg.constructor.name : typeof thisArg);
+            console.log('args');
+            console.log(args);
+            console.log('chamando ');
+            return target.bind(thisArg)(...args);
+        },
+    });
+
+    return this;
 }
